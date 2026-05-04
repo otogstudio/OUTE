@@ -15,8 +15,12 @@
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary">
   <style>
-    html, body {
-      height: 100%;
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100%;
     }
 
     ::selection {
@@ -151,6 +155,13 @@
       margin-top: 0.5rem;
     }
 
+    .enquire-link {
+      margin-top: 0.75rem;
+      font-size: 0.95em;
+      text-align: center;
+      text-align-last: center;
+    }
+
     .gallery-wrap + .product-description {
       margin-top: 0.25rem;
     }
@@ -225,7 +236,8 @@
       </div>
 
       <div class="product-description">
-        <p>This cap takes its shape from traditional cycling and cricket caps, reworked into something more casual and everyday. It's constructed in the old way, fully lined inside, and cut from a heavier weight cotton twill. It ages beautifully. The cloth softens, the colours settle, and the cap becomes entirely yours over time.</p>
+        <p>This cap takes its shape from traditional cycling and cricket caps, reworked into something more casual and everyday. It's constructed in the old way, fully lined inside, and cut from a heavier weight cotton twill. It ages beautifully. The cloth softens, the colours settle, and the cap becomes entirely yours over time. Available in two colours and two sizes: S/M and M/L.</p>
+        <p class="enquire-link">Enquire via <a href="mailto:oute.co.uk@gmail.com?subject=Enquiry%20—%20Twill%20Cap">Email</a> / <a href="https://www.instagram.com/oute.co.uk">Instagram</a></p>
       </div>
 
       <div class="divider">Pewter Button</div>
@@ -237,13 +249,14 @@
       </div>
 
       <div class="product-description">
-        <p>Each button is pressed into sand by hand, with the stones set in place before casting. Molten pewter is poured into the mould and left to set. Once cooled, each piece is finished and polished by hand. The stones are lab-grown, chemically identical to their natural counterparts. Cast from lead-free English pewter, 2cm in diameter. Made to replace the top button on a favourite shirt or jacket, or anywhere you see fit.</p>
+        <p>Each button is one of a kind, sand-cast by hand from lead-free English pewter with carefully set stones. 2cm in diameter. Made to replace the top button on a favourite shirt or jacket, or anywhere you see fit. Made to order.</p>
+        <p class="enquire-link">Enquire via <a href="mailto:oute.co.uk@gmail.com?subject=Enquiry%20—%20Pewter%20Button">Email</a> / <a href="https://www.instagram.com/oute.co.uk">Instagram</a></p>
       </div>
 
       <div class="divider">About</div>
 
       <div class="footer">
-        <p>OUTE&reg; is designed and made in London. Every piece is finished in England using materials sourced as close to home as we can find them. We work with a small number of makers who share our standards and take the same care we do.</p>
+        <p>OUTE makes caps and goods in London. Each piece starts with a traditional shape or detail that we reinterpret. Made in small quantities in a family-run atelier, using fine materials. We also work with a small number of makers who share our standards and values.</p>
         <p>New pieces are released as they're ready.</p>
         <p>All orders are placed directly with us.<br>To enquire, purchase, or just say hello, reach us via <a href="mailto:oute.co.uk@gmail.com">Email</a> or <a href="https://www.instagram.com/oute.co.uk">Instagram</a>.</p>
         <img src="images/footer-logo.svg" alt="OUTE" style="display:block;width:50px;height:50px;margin:1.25rem auto 0;">
@@ -277,8 +290,14 @@
 
       let current = 0;
 
-      wrap.addEventListener('click', function () {
-        current = (current + 1) % sources.length;
+      wrap.addEventListener('click', function (e) {
+        const rect = wrap.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        if (x < rect.width / 2) {
+          current = (current - 1 + sources.length) % sources.length;
+        } else {
+          current = (current + 1) % sources.length;
+        }
         img.src = sources[current];
         counter.textContent = (current + 1) + ' / ' + sources.length;
       });
@@ -297,8 +316,14 @@
 
       let current = 0;
 
-      wrap.addEventListener('click', function () {
-        current = (current + 1) % sources.length;
+      wrap.addEventListener('click', function (e) {
+        const rect = wrap.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        if (x < rect.width / 2) {
+          current = (current - 1 + sources.length) % sources.length;
+        } else {
+          current = (current + 1) % sources.length;
+        }
         img.src = sources[current];
         counter.textContent = (current + 1) + ' / ' + sources.length;
       });
