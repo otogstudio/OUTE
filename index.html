@@ -187,6 +187,22 @@
       opacity: 0.3;
     }
 
+    .divider-tagline::before,
+    .divider-tagline::after {
+      display: none;
+    }
+
+    .divider-tagline {
+      justify-content: center;
+    }
+
+    @media (min-width: 501px) {
+      .divider-tagline::before,
+      .divider-tagline::after {
+        display: block;
+      }
+    }
+
     .footer {
       font-size: 0.75em;
       line-height: 1.4;
@@ -223,7 +239,7 @@
 
       <img src="images/oute-logo-header.svg" alt="OUTE" style="display:block;width:150px;margin:0 auto;">
 
-      <div class="divider">Caps and goods, reinterpreted from traditional shapes and craft methods.</div>
+      <div class="divider divider-tagline">Caps and goods, reinterpreted from traditional shapes and craft methods.</div>
 
       <div class="storefront">
         <p class="storefront-status">Open</p>
