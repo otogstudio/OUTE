@@ -287,6 +287,23 @@
   </div>
 
   <script>
+    function addSwipe(el, onLeft, onRight) {
+      let startX = 0;
+      let startY = 0;
+      el.addEventListener('touchstart', function (e) {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+      }, { passive: true });
+      el.addEventListener('touchend', function (e) {
+        const dx = e.changedTouches[0].clientX - startX;
+        const dy = e.changedTouches[0].clientY - startY;
+        if (Math.abs(dx) > 30 && Math.abs(dx) > Math.abs(dy)) {
+          if (dx < 0) onRight();
+          else onLeft();
+        }
+      });
+    }
+
     // Caps gallery
     (function () {
       const wrap = document.getElementById('gallery-caps');
@@ -304,17 +321,19 @@
 
       let current = 0;
 
+      function go(dir) {
+        current = (current + dir + sources.length) % sources.length;
+        img.src = sources[current];
+        counter.textContent = (current + 1) + ' / ' + sources.length;
+      }
+
       wrap.addEventListener('click', function (e) {
         const rect = wrap.getBoundingClientRect();
         const x = e.clientX - rect.left;
-        if (x < rect.width / 2) {
-          current = (current - 1 + sources.length) % sources.length;
-        } else {
-          current = (current + 1) % sources.length;
-        }
-        img.src = sources[current];
-        counter.textContent = (current + 1) + ' / ' + sources.length;
+        go(x < rect.width / 2 ? -1 : 1);
       });
+
+      addSwipe(wrap, function () { go(-1); }, function () { go(1); });
     })();
 
     // Buttons gallery
@@ -330,17 +349,19 @@
 
       let current = 0;
 
+      function go(dir) {
+        current = (current + dir + sources.length) % sources.length;
+        img.src = sources[current];
+        counter.textContent = (current + 1) + ' / ' + sources.length;
+      }
+
       wrap.addEventListener('click', function (e) {
         const rect = wrap.getBoundingClientRect();
         const x = e.clientX - rect.left;
-        if (x < rect.width / 2) {
-          current = (current - 1 + sources.length) % sources.length;
-        } else {
-          current = (current + 1) % sources.length;
-        }
-        img.src = sources[current];
-        counter.textContent = (current + 1) + ' / ' + sources.length;
+        go(x < rect.width / 2 ? -1 : 1);
       });
+
+      addSwipe(wrap, function () { go(-1); }, function () { go(1); });
     })();
 
     // Live London clock
